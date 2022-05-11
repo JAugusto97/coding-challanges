@@ -14,24 +14,43 @@ class MinHeap:
     def get_min(self) -> numeric:
         return self.arr[0]
 
-    def extract_min(self) -> numeric:
-        key = self.arr[0]
-        self.arr[0] = self.arr[self.size-1]
-
-        if self.size-1 > 0:
-            self.__bubble_down()
-
-        self.size -= 1
-
-        return key
-
+   
     def insert(self, key: numeric) -> None:
         if self.size == self.max_capacity:
             raise Exception("Heap is full")
         else:
             self.size += 1
             self.arr[self.size-1] = key
-            self.__bubble_up()
+            self.bubble_up()
+
+    def bubble_up(self) -> None:
+        curr_idx = self.size - 1
+        parent_idx = self.__get_parent(curr_idx)
+        while (self.arr[parent_idx] > self.arr[curr_idx]) and parent_idx >= 0:
+            self.__swap(curr_idx, parent_idx)
+            curr_idx = parent_idx
+            parent_idx = self.__get_parent(curr_idx)
+ 
+    def extract_min(self) -> numeric:
+        key = self.arr[0]
+        self.arr[0] = self.arr[self.size-1]
+
+        if self.size-1 > 0:
+            self.bubble_down()
+
+        self.size -= 1
+
+        return key
+
+    def bubble_down(self) -> None:
+        curr_idx = 0
+        smallest_child_idx = self.__get_smallest_child(curr_idx)
+
+        # traverse heap while node has children and is bigger than them
+        while smallest_child_idx and (self.arr[curr_idx] > self.arr[smallest_child_idx]):
+            self.__swap(curr_idx, smallest_child_idx)
+            curr_idx = smallest_child_idx
+            smallest_child_idx = self.__get_smallest_child(curr_idx)
 
     def __get_parent(self, i: int) -> int:
         return (i-1)//2
@@ -47,13 +66,7 @@ class MinHeap:
         self.arr[idx_i] = self.arr[idx_j]
         self.arr[idx_j] = aux
 
-    def __bubble_up(self) -> None:
-        curr_idx = self.size - 1
-        parent_idx = self.__get_parent(curr_idx)
-        while (self.arr[parent_idx] > self.arr[curr_idx]) and parent_idx >= 0:
-            self.__swap(curr_idx, parent_idx)
-            curr_idx = parent_idx
-            parent_idx = self.__get_parent(curr_idx)
+    
 
     def __has_left_child(self, i: int) -> bool:
         return True if self.__get_left_child(i) < self.size else False
@@ -84,15 +97,6 @@ class MinHeap:
 
         return smallest_child_idx
 
-    def __bubble_down(self) -> None:
-        curr_idx = 0
-        smallest_child_idx = self.__get_smallest_child(curr_idx)
-
-        # traverse heap while node has children and is bigger than them
-        while smallest_child_idx and (self.arr[curr_idx] > self.arr[smallest_child_idx]):
-            self.__swap(curr_idx, smallest_child_idx)
-            curr_idx = smallest_child_idx
-            smallest_child_idx = self.__get_smallest_child(curr_idx)
 
     def __len__(self) -> int:
         return self.size
