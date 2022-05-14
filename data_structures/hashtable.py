@@ -6,30 +6,39 @@ class HashTable:
 
     def insert(self, key: object, value: object) -> None:
         if self.size == self.capacity:
-            print(f"MAX SIZE {self.size} {self.capacity}")
             self.__increase_capacity()
 
         idx = hash(key) % self.capacity
         if not self.table[idx]:  #  entry is available
             self.table[idx] = (key, value)
+            self.size += 1
+
         else:  # entry not available, linearly search for next available entry
-            i = idx + 1 if idx + 1 < self.capacity else 0
-            while i < self.capacity:
-                if not self.table[i]:  # found available entry
-                    self.table[i] = (key, value)
-                    print(f"inserted at {i}")
-                    break
-
-                if i == self.capacity-1:  # reached the end of the table, go back to start
-                    i = -1
-
-                i += 1
+            if key == self.table[idx][0]:  # key already exists, replace value
+                self.table[idx] = (key, value)
+            else:  # different key, search for new entry
+                idx = self.__linear_probe(idx, find_empty=True)
+                self.table[idx] = (key, value)
+                self.size += 1
         
-        self.size += 1
 
     def remove(self, key: object) -> None:
         pass
 
+    def __linear_probe(self, conflict_idx, find_empty=True):
+        i = conflict_idx + 1 if conflict_idx + 1 < self.capacity else 0
+        while i < self.capacity:
+            if (not self.table[i] and find_empty) or (self.table[i] and not find_empty):  # found available entry
+                return i
+
+            if i == self.capacity-1:  # reached the end of the table, go back to start
+                i = -1
+
+            if i == conflict_idx:  # reached back to conflict_idx, no available entries
+                return -1
+
+            i += 1
+            
     def __increase_capacity(self) -> None:
         tmp_table = self.table
         tmp_capacity = self.capacity
@@ -45,8 +54,29 @@ class HashTable:
     def __contains__(self, key: object) -> bool:
         pass
 
+    def __call__(self, key: object) -> object:
+        idx = hash(key) % self.capacity
+        if not self.table[idx]:
+            raise KeyError
+        else:
+            k, v = self.table[idx]
+            if k == key:
+                return v
+            else:
+                idx_probe = idx
+                while True: 
+                    idx_probe = self.__linear_probe(idx_probe, find_empty=False)
+                    if idx_probe == -1 or idx == idx_probe:
+                        raise KeyError
+                
+                    k, v = self.table[idx]
+                    if k == key:
+                        return v
+
+
 h = HashTable(10)
-for i in range(100):
-    print(f"trying to insert {i}", h.table, h.capacity, h.size)
-    h.insert("a", i)
-print(len(h.table))
+for i in range(1000):
+    h.insert(str(i), i)
+    print(f"trying to insert {i}, current capacity: {h.capacity}, current size: {h.size}")
+print(h.table)
+print(h("1"))
