@@ -1,8 +1,10 @@
 """
-Build a histogram from scratch. Inputs: a list of floats and an integer representing the number of bins that the histogram
-should have. This algorithm should return a list of lists in the following format: [start_range, end_range, count].
-representing the lower end of the respective bin, the higher end of the respective bin and the number of elements contained within
-that bin. 
+Build a histogram from scratch. Inputs: a list of floats and an integer
+representing the number of bins that the histogram should have.
+This algorithm should return a list oflists in the
+following format: [start_range, end_range, count]. representing the
+lower end of the respective bin, the higher end of the respective bin
+and the number of elements contained within that bin.
 """
 
 import numpy as np
