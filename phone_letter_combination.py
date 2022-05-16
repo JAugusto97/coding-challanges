@@ -2,9 +2,12 @@
 https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 Difficulty: Medium
 
-Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+Given a string containing digits from 2-9 inclusive,
+return all possible letter combinations that the number could represent.
+Return the answer in any order.
 
-A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+A mapping of digit to letters (just like on the telephone buttons) is given below.
+Note that 1 does not map to any letters.
 
 Example 1:
 
@@ -36,13 +39,13 @@ class Solution:
         combination([ad,ae,bd,be], [f, g]) = [adf, adg, aef, aeg, bdf, bdg, bef, beg]
         """
         r = []
-        
+
         for c1 in t1:
             for c2 in t2:
                 r.append((c1 + c2))
-                
+
         return set(r)
-               
+
     def letterCombinations(self, digits: str) -> List[str]:
         mapping = {
             "2": set(["a", "b", "c"]),
@@ -52,9 +55,9 @@ class Solution:
             "6": set(["m", "n", "o"]),
             "7": set(["p", "q", "r", "s"]),
             "8": set(["t", "u", "v"]),
-            "9": set(["w", "x", "y", "z"])
+            "9": set(["w", "x", "y", "z"]),
         }
-        
+
         possibilities = [mapping[c] for c in digits]
         if len(possibilities) > 1:  # at least two combinations
             r = self.get_combinations(possibilities[0], possibilities[1])
@@ -66,5 +69,5 @@ class Solution:
 
         else:
             r = []
-            
+
         return r
