@@ -46,18 +46,23 @@ class ListNode:
         self.val = val
         self.next = next
 
+
 class Solution:
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    def addTwoNumbers(
+        self, l1: Optional[ListNode], l2: Optional[ListNode]
+    ) -> Optional[ListNode]:
         l3 = ListNode()
         head = l3
         carry_out = 0
-        while l1.next != None or l2.next != None:  # at least one list must still have elements
+        while (
+            l1.next != None or l2.next != None
+        ):  # at least one list must still have elements
             # if one list is shorter than the other, keep adding nodes with key 0
             if l1.next == None:
                 l1.next = ListNode()
             if l2.next == None:
                 l2.next = ListNode()
-            
+
             s = l1.val + l2.val + carry_out
             if s >= 10:
                 digit = s % 10
@@ -66,14 +71,14 @@ class Solution:
             else:
                 l3.val = s
                 carry_out = 0
-            
+
             # iterate on all lists
             l1 = l1.next
             l2 = l2.next
-            
+
             l3.next = ListNode()
             l3 = l3.next
-        
+
         # last digit
         s = l1.val + l2.val + carry_out
         if s >= 10:
@@ -83,8 +88,8 @@ class Solution:
         else:
             l3.val = s
             carry_out = 0
-            
+
         if carry_out == 1:
             l3.next = ListNode(val=1)
-            
+
         return head

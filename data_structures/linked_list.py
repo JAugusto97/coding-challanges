@@ -3,9 +3,10 @@ class Node:
         self.key = key
         self.next = None
 
+
 class LinkedList:
     def __init__(self) -> None:
-        self.head = None 
+        self.head = None
         self.size = 0
 
     def append(self, key) -> None:
@@ -18,12 +19,12 @@ class LinkedList:
             while curr.next != None:
                 curr = curr.next
             curr.next = node
-    
+
     def pop(self, key) -> None:
         if self.head:
             curr = self.head
             prev = None
-            while (curr.key != key and curr.next != None):
+            while curr.key != key and curr.next != None:
                 prev = curr
                 curr = curr.next
 

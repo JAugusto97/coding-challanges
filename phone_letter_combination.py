@@ -36,13 +36,13 @@ class Solution:
         combination([ad,ae,bd,be], [f, g]) = [adf, adg, aef, aeg, bdf, bdg, bef, beg]
         """
         r = []
-        
+
         for c1 in t1:
             for c2 in t2:
                 r.append((c1 + c2))
-                
+
         return set(r)
-               
+
     def letterCombinations(self, digits: str) -> List[str]:
         mapping = {
             "2": set(["a", "b", "c"]),
@@ -52,9 +52,9 @@ class Solution:
             "6": set(["m", "n", "o"]),
             "7": set(["p", "q", "r", "s"]),
             "8": set(["t", "u", "v"]),
-            "9": set(["w", "x", "y", "z"])
+            "9": set(["w", "x", "y", "z"]),
         }
-        
+
         possibilities = [mapping[c] for c in digits]
         if len(possibilities) > 1:  # at least two combinations
             r = self.get_combinations(possibilities[0], possibilities[1])
@@ -66,5 +66,5 @@ class Solution:
 
         else:
             r = []
-            
+
         return r

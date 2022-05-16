@@ -3,6 +3,7 @@ class TrieNode:
         self.children = {}
         self.end = False
 
+
 class Trie:
     def __init__(self) -> None:
         self.head = TrieNode()
@@ -17,14 +18,14 @@ class Trie:
         curr.end = True
 
     def startswith(self, substring: str) -> bool:
-            curr = self.head
-            for c in substring:
-                if c in curr.children:
-                    curr = curr.children[c]
-                else:
-                    return False
+        curr = self.head
+        for c in substring:
+            if c in curr.children:
+                curr = curr.children[c]
+            else:
+                return False
 
-            return True
+        return True
 
     def __contains__(self, word):
         curr = self.head

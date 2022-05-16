@@ -12,13 +12,12 @@ Output: 5
 Example 2:
 Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
 Output: 4
- 
 
 Constraints:
 1 <= k <= nums.length <= 104
 -104 <= nums[i] <= 104
 
-Solution: 
+Solution:
 * Using a min heap, iterate through the list and store the first K elements
 * after the Kth element, start checking if the element is bigger than the top of the heap (smallest value)
 * if its bigger, than swap it and restore the heap property
@@ -30,6 +29,7 @@ Space Complexity: O(K)
 from typing import List
 from data_structures import MinHeap
 
+
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         h = MinHeap()
@@ -40,6 +40,6 @@ class Solution:
                 vmin = h.get_min()
                 if v > vmin:
                     h.arr[0] = v
-                    h.bubble_down()  #  O(logl)
+                    h.bubble_down()  # O(logl)
 
         return h.extract_min()
