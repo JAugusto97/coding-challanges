@@ -2,7 +2,7 @@
 
 Keeping track of some interesting coding challanges.
 
-## Algorithms
+## Problems
 * [Add two numbers](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) (leetcode - Medium)
 * [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) (leetcode - Medium)
 * Binary Search
