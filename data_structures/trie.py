@@ -1,5 +1,3 @@
-from time import time
-
 class TrieNode:
     def __init__(self) -> None:
         self.children = {}
