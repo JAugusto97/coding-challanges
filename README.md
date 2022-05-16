@@ -8,6 +8,7 @@ Keeping track of some interesting coding challanges.
 * Binary Search
 * Histogram from Scratch
 * [Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) (leetcode - Medium)
+* [Word Break](https://leetcode.com/problems/word-break/) (leetcode - Medium)
 
 ## Data Structures
 * Trie
