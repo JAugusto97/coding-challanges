@@ -53,7 +53,23 @@ class HashTable:
         self.size = tmp_capacity
 
     def __contains__(self, key: object) -> bool:
-        pass
+        idx = hash(key) % self.capacity
+        if self.table[idx] is None:
+            return False
+        else:
+            k, v = self.table[idx]
+            if k == key:
+                return True
+            else:
+                idx_probe = idx
+                while True:
+                    idx_probe = self.__linear_probe(idx_probe, find_empty=False)
+                    if idx_probe == -1 or idx == idx_probe:
+                        return False
+
+                    k, _ = self.table[idx_probe]
+                    if k == key:
+                        return True
 
     def __call__(self, key: object) -> object:
         idx = hash(key) % self.capacity
@@ -83,3 +99,5 @@ for i in range(15):
     )
 print(h.table)
 print(h("1"))
+print("2" in h)
+print("2o" in h)
