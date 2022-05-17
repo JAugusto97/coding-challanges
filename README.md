@@ -15,3 +15,4 @@ Keeping track of some interesting coding challanges.
 * Trie
 * MinHeap
 * Linked List
+* Hash Table
