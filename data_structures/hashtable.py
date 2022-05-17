@@ -21,9 +21,6 @@ class HashTable:
                 self.table[idx] = (key, value)
                 self.size += 1
 
-    def remove(self, key: object) -> None:
-        pass
-
     def __linear_probe(self, conflict_idx, find_empty=True):
         i = conflict_idx + 1 if conflict_idx + 1 < self.capacity else 0
         while i < self.capacity:
@@ -89,15 +86,3 @@ class HashTable:
                     k, v = self.table[idx_probe]
                     if k == key:
                         return v
-
-
-h = HashTable(10)
-for i in range(15):
-    h.insert(str(i), i)
-    print(
-        f"trying to insert {i}, current capacity: {h.capacity}, current size: {h.size}"
-    )
-print(h.table)
-print(h("1"))
-print("2" in h)
-print("2o" in h)
