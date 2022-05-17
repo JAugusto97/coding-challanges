@@ -57,7 +57,7 @@ class HashTable:
         if self.table[idx] is None:
             return False
         else:
-            k, v = self.table[idx]
+            k, _ = self.table[idx]
             if k == key:
                 return True
             else:
