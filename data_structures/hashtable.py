@@ -57,7 +57,7 @@ class HashTable:
 
     def __call__(self, key: object) -> object:
         idx = hash(key) % self.capacity
-        if not self.table[idx]:
+        if self.table[idx] is None:
             raise KeyError
         else:
             k, v = self.table[idx]
@@ -68,10 +68,9 @@ class HashTable:
                 while True:
                     idx_probe = self.__linear_probe(idx_probe, find_empty=False)
                     if idx_probe == -1 or idx == idx_probe:
-                        print(idx_probe, idx)
                         raise KeyError
 
-                    k, v = self.table[idx]
+                    k, v = self.table[idx_probe]
                     if k == key:
                         return v
 
