@@ -1,6 +1,6 @@
-# coding_challanges
+# coding_challenges
 
-Keeping track of some interesting coding challanges.
+Keeping track of some interesting coding challenges.
 
 ## Problems
 * [Add two numbers](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) (leetcode - Medium)
